@@ -119,11 +119,6 @@ jobs:
 
       - name: Check out code
         uses: actions/checkout@v2
-
-      - name: Set Dockerfile Path 
-        id: set-dockerfile-path
-        run: |
-          echo "::set-output name=dockerfile_path::$(echo $(pwd)/.ci.Dockerfile)"
           
       - name: Go Build Cache
         uses: actions/cache@v2
@@ -172,7 +167,6 @@ jobs:
       bundle_version: ${{ steps.set-variables-image.outputs.bundle_version }}
       tag_event: ${{ steps.set-variables-image.outputs.tag_event }}
       dist_matrix: ${{ steps.set-variables.outputs.dist_matrix }}
-      dockerfile_path: ${{ steps.set-dockerfile-path.outputs.dockerfile_path }}
 
   build-operator:
     runs-on: ubuntu-latest
@@ -189,7 +183,6 @@ jobs:
       OPERATOR_IMAGE_REGISTRY: ${{ needs.setup.outputs.operator_image_registry }}
       BUNDLE_IMAGE_REPOSITORY: "${{ needs.setup.outputs.bundle_image_registry }}/${{ needs.setup.outputs.bundle_image_repository_name }}"
       BUNDLE_IMAGE_REGISTRY: ${{ needs.setup.outputs.bundle_image_registry }}
-      DOCKERFILE_PATH: "${{ needs.setup.outputs.dockerfile_path }}"
       
     steps:
       - name: Set up Go 1.x
@@ -230,6 +223,13 @@ jobs:
           # Configure Platform Variables
           echo "::set-output name=platform_os::$(echo ${{ matrix.platform }} |  cut -d/ -f1)"
           echo "::set-output name=platform_arch::$(echo ${{ matrix.platform }} |  cut -d/ -f2)"
+
+      - name: Remove .dockerignore If Present (to avoid buildx errors)
+        shell: bash
+        run: |
+          if [ -f "./.dockerignore" ] ; then
+            rm "./dockerignore"
+          fi
 
       - name: Download Dependencies
         shell: bash
