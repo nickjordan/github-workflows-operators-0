@@ -24,7 +24,7 @@ on:
       REGISTRY_PASSWORD:
         description: 'Password for Registry'
         required: true
-      OPERTATOR_IMAGE_REPOSITORY:
+      OPERATOR_IMAGE_REPOSITORY:
         description: 'Registry image e.g. quay.io/redhat-cop/repository-name'
         required: false
       BUNDLE_IMAGE_REPOSITORY:
