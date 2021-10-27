@@ -28,8 +28,7 @@ on:
         description: 'Registry image e.g. quay.io/redhat-cop/repository-name'
         required: false
 
-jobs:
- env:
+env:
   DEFAULT_BUNDLE_VERSION: "0.0.1"
   DEFAULT_BUNDLE_CHANNEL: "alpha"
   DEFAULT_OPERATOR_VERSION: "latest"
