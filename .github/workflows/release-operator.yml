@@ -37,9 +37,7 @@ env:
 jobs:
   setup:
     runs-on: ubuntu-latest
-    name: setup
-    with: 
-      
+    name: setup      
     steps:
       - name: Check if registry secrets are set
         run: |
