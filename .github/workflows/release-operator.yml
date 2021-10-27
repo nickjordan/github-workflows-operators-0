@@ -56,12 +56,14 @@ jobs:
 
       - name: Setting Workflow Variables
         id: set-variables
+        env: 
+          BUILD_PLATFORMS: ${{ inputs.BUILD_PLATFORMS }}
         run: |
           echo "::set-output name=repository_name::$(basename $GITHUB_REPOSITORY)"
           echo "::set-output name=bin_dir::$(pwd)/bin"
 
           # Create Distribution Matrix
-          echo "::set-output name=dist_matrix::$(echo -n "${{ github.event.inputs.BUILD_PLATFORMS }}" | jq -csR '. | split(",")')"
+          echo "::set-output name=dist_matrix::$(echo -n "${{ env.BUILD_PLATFORMS }}" | jq -csR '. | split(",")')"
 
       - name: Setting Image Variables
         id: set-variables-image
