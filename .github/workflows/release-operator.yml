@@ -98,6 +98,9 @@ jobs:
             echo "::set-output name=operator_version::$DEFAULT_OPERATOR_VERSION"
             echo "::set-output name=bundle_version::$DEFAULT_BUNDLE_VERSION"
           fi
+          
+          # Set Dockerfile Absolute Path (Buildx Absolute Path Fix)
+          echo "::set-output name=dockerfile_path::$(echo pwd/.ci.dockerfile)"
 
       - name: Verify Semver Release
         if: ${{ steps.set-variables-image.outputs.tag_event == 'true' }}
@@ -166,6 +169,7 @@ jobs:
       bundle_version: ${{ steps.set-variables-image.outputs.bundle_version }}
       tag_event: ${{ steps.set-variables-image.outputs.tag_event }}
       dist_matrix: ${{ steps.set-variables.outputs.dist_matrix }}
+      dockerfile_path: ${{ steps.set-variables-image.outputs.dockerfile_path }}
 
   build-operator:
     runs-on: ubuntu-latest
@@ -182,6 +186,8 @@ jobs:
       OPERATOR_IMAGE_REGISTRY: ${{ needs.setup.outputs.operator_image_registry }}
       BUNDLE_IMAGE_REPOSITORY: "${{ needs.setup.outputs.bundle_image_registry }}/${{ needs.setup.outputs.bundle_image_repository_name }}"
       BUNDLE_IMAGE_REGISTRY: ${{ needs.setup.outputs.bundle_image_registry }}
+      DOCKERFILE_PATH: "${{ needs.setup.outputs.dockerfile_path }}"
+      
     steps:
       - name: Set up Go 1.x
         uses: actions/setup-go@v1
@@ -254,7 +260,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./ci.Dockerfile
+          file: "${{ env.DOCKERFILE_PATH }}"
           platforms: ${{ matrix.platform }}
           push: true
           tags: "${{ env.OPERATOR_IMAGE_REPOSITORY }}:latest,${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }}"
@@ -357,7 +363,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-
           file: ./bundle.Dockerfile
           platforms: ${{ matrix.platform }}
           push: true
