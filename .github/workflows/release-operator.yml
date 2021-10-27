@@ -99,8 +99,6 @@ jobs:
             echo "::set-output name=bundle_version::$DEFAULT_BUNDLE_VERSION"
           fi
           
-          # Set Dockerfile Absolute Path (Buildx Absolute Path Fix)
-          echo "::set-output name=dockerfile_path::$(echo $(pwd)/.ci.Dockerfile)"
 
       - name: Verify Semver Release
         if: ${{ steps.set-variables-image.outputs.tag_event == 'true' }}
@@ -122,6 +120,11 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
+      - name: Set Dockerfile Path 
+        id: set-dockerfile-path
+        run: |
+          echo "::set-output name=dockerfile_path::$(echo $(pwd)/.ci.Dockerfile)"
+          
       - name: Go Build Cache
         uses: actions/cache@v2
         with:
@@ -169,7 +172,7 @@ jobs:
       bundle_version: ${{ steps.set-variables-image.outputs.bundle_version }}
       tag_event: ${{ steps.set-variables-image.outputs.tag_event }}
       dist_matrix: ${{ steps.set-variables.outputs.dist_matrix }}
-      dockerfile_path: ${{ steps.set-variables-image.outputs.dockerfile_path }}
+      dockerfile_path: ${{ steps.set-dockerfile-path.outputs.dockerfile_path }}
 
   build-operator:
     runs-on: ubuntu-latest
