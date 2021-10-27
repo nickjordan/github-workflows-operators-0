@@ -263,7 +263,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ".ci.Dockerfile"
+          file: "./ci.Dockerfile"
           platforms: ${{ matrix.platform }}
           push: true
           tags: "${{ env.OPERATOR_IMAGE_REPOSITORY }}:latest,${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }}"
