@@ -229,13 +229,6 @@ jobs:
           echo "::set-output name=platform_os::$(echo ${{ matrix.platform }} |  cut -d/ -f1)"
           echo "::set-output name=platform_arch::$(echo ${{ matrix.platform }} |  cut -d/ -f2)"
 
-      - name: Remove .dockerignore If Present (to avoid buildx errors)
-        shell: bash
-        run: |
-          if [ -f ".dockerignore" ] ; then
-            rm ".dockerignore"
-          fi
-
       - name: Download Dependencies
         shell: bash
         run: |
