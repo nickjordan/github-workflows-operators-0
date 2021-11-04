@@ -14,7 +14,6 @@ on:
         type: string
       PR_ACTOR:
         description: 'Email for Git Commit PR to Release Operator'
-        default: 'raffaele.spazzoli@gmail.com'
         required: false
         type: string
     secrets:
