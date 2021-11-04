@@ -609,7 +609,7 @@ jobs:
           # Untar
           ls dist/${{ env.REPOSITORY_NAME }}-bundle*.tar.gz | xargs -n1 tar -C bundle/ --strip-components=1 -xzvf
 
-       - name: check whether it is first release
+      - name: check whether it is first release
         shell: bash
         run: |
           echo first_release=$([[ ! -d "./tmp/${{ env.COMMUNITY_OPERATORS_REPOSITORY_NAME }}//operators/${{ env.REPOSITORY_NAME }} ]] && echo 'true' || echo 'false') >> $GITHUB_ENV
