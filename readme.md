@@ -7,6 +7,7 @@ This repoisitory contains work-in-progress example reusable Github Actions Workf
 This workflow allows a caller repositiory following a common structure to build the operator, bundle, helm charts, and release to OpeatorHub via Github Fork PR request process.
 #### Requirements 
 * Fork of ```redhat-openshift-ecosystem/community-operators-prod``` created by ```PR_ACTOR``` for PR release process.
+* Github branch ```gh-pages``` on caller-repo for Github Pages Helm Chart Hosting
 ##### Caller (Operator Repo) Configuration 
 * Operator Dockerfile located at ```./Dockerfile``` in root of Repository
 * Bundle Dockerfile located at ```./bundle.Dockerfile``` in root of Repository
