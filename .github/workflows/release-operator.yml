@@ -46,8 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     name: setup      
     steps:
-      - name: 
-      registry secrets are set
+      - name: CHeck if registry secrets are set
         run: |
           if [ "${{ secrets.REGISTRY_USERNAME }}" == "" ] || [ "${{ secrets.REGISTRY_PASSWORD }}" == "" ]; then
             echo "Required Secrets 'REGISTRY_USERNAME' or 'REGISTRY_PASSWORD' are not set!"
