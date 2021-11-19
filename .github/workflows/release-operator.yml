@@ -267,7 +267,7 @@ jobs:
           file: "./ci.Dockerfile"
           platforms: ${{ matrix.platform }}
           push: true
-          tags: "${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ matrix.platform }}-${{ env.OPERATOR_VERSION }}"
+          tags: "${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ steps.setup-build-step.outputs.platform_os }}-${{ steps.setup-build-step.outputs.platform_arch }}-${{ env.OPERATOR_VERSION }}"
 
       - name: "Append to Image Manifest"
         shell: bash
