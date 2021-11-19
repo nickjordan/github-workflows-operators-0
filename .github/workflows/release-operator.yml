@@ -272,7 +272,7 @@ jobs:
       - name: "Append to Image Manifest"
         shell: bash
         run: |
-          docker buildx imagetools create --append -t "${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }}" ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ steps.setup-build-step.outputs.platform_os }}-${{ steps.setup-build-step.outputs.platform_arch }}-${{ env.OPERATOR_VERSION }}
+          docker buildx imagetools create --append -t ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }} ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ steps.setup-build-step.outputs.platform_os }}-${{ steps.setup-build-step.outputs.platform_arch }}-${{ env.OPERATOR_VERSION }}
 
       - name: Prepare Distribution Artifacts
         shell: bash
