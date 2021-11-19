@@ -394,36 +394,6 @@ jobs:
         with:
           name: dist
           path: dist
-
-  package-image-manifests: 
-    runs-on: ubuntu-latest
-    name: package-helm
-    needs: ["setup", "build-operator"]
-    env:
-      REPOSITORY_NAME: ${{ needs.setup.outputs.repository_name }}
-      OPERATOR_VERSION: ${{ needs.setup.outputs.operator_version }}
-      BUNDLE_VERSION: ${{ needs.setup.outputs.bundle_version }}
-      OPERATOR_IMAGE_REPOSITORY: "${{ needs.setup.outputs.operator_image_registry }}/${{ needs.setup.outputs.operator_image_repository_name }}"
-      OPERATOR_IMAGE_REGISTRY: ${{ needs.setup.outputs.operator_image_registry }}
-      BUNDLE_IMAGE_REPOSITORY: "${{ needs.setup.outputs.bundle_image_registry }}/${{ needs.setup.outputs.bundle_image_repository_name }}"
-      BUNDLE_IMAGE_REGISTRY: ${{ needs.setup.outputs.bundle_image_registry }}
-    steps:
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Login to Bundle Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ${{ env.BUNDLE_IMAGE_REGISTRY }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-
-      - name: "Push Bundle Image Manifest"
-        shell: bash
-        run: |
-        docker buildx imagetools create -t "${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }}" ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }}
-
-          
           
   package-helm:
     runs-on: ubuntu-latest
