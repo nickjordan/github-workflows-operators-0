@@ -13,7 +13,7 @@ on:
         required: false
         type: string
       PR_ACTOR:
-       description: 'Email for Git Commit PR to Release Operator'
+        description: 'Email for Git Commit PR to Release Operator'
         required: false
         type: string
     secrets:
