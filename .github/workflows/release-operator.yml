@@ -190,7 +190,7 @@ jobs:
       OPERATOR_IMAGE_REGISTRY: ${{ needs.setup.outputs.operator_image_registry }}
       BUNDLE_IMAGE_REPOSITORY: "${{ needs.setup.outputs.bundle_image_registry }}/${{ needs.setup.outputs.bundle_image_repository_name }}"
       BUNDLE_IMAGE_REGISTRY: ${{ needs.setup.outputs.bundle_image_registry }}
-      
+
     steps:
       - name: Set up Go 1.x
         uses: actions/setup-go@v1
