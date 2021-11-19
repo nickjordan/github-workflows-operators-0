@@ -292,7 +292,7 @@ jobs:
   build-bundle:
     runs-on: ubuntu-latest
     name: build-bundle
-    needs: ["setup", "build-operator", "package-image-manifests"]
+    needs: ["setup", "build-operator"]
     env:
       REPOSITORY_NAME: ${{ needs.setup.outputs.repository_name }}
       OPERATOR_VERSION: ${{ needs.setup.outputs.operator_version }}
