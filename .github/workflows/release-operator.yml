@@ -314,7 +314,7 @@ jobs:
       - name: "Append to Image Manifest"
         shell: bash
         run: |
-          docker buildx imagetools create -t "${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }}" ${{ env.OPERATOR_IMAGE_REPOSITORY }}:linux-ppc64le-${{ env.OPERATOR_VERSION }} ${{ env.OPERATOR_IMAGE_REPOSITORY }}:linux-arm64-${{ env.OPERATOR_VERSION }}${{ env.OPERATOR_IMAGE_REPOSITORY }}:linux-amd64-${{ env.OPERATOR_VERSION }}
+          docker buildx imagetools create -t "${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }}" ${{ env.OPERATOR_IMAGE_REPOSITORY }}:linux-ppc64le-${{ env.OPERATOR_VERSION }} ${{ env.OPERATOR_IMAGE_REPOSITORY }}:linux-arm64-${{ env.OPERATOR_VERSION }} ${{ env.OPERATOR_IMAGE_REPOSITORY }}:linux-amd64-${{ env.OPERATOR_VERSION }}
 
   build-bundle:
     runs-on: ubuntu-latest
