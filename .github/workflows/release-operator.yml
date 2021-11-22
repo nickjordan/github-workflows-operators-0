@@ -319,7 +319,7 @@ jobs:
           for IMGTAG in  ${{needs.set-variables.outputs.BUILD_PLATFORM_TAGS}}; do \
               podman manifest add ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }} docker://$OPERATOR_IMAGE_REPOSITORY:IMGTAG; \
           done
-          podman manifest push --all $REPO:latest
+          podman manifest push --all ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }}
 
   build-bundle:
     runs-on: ubuntu-latest
