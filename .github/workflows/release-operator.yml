@@ -308,8 +308,8 @@ jobs:
       - name: Log in to Registry
         uses: redhat-actions/podman-login@v1
         with:
-          username: ${{ env.REGISTRY_USERNAME }}
-          password: ${{ env.REGISTRY_PASSWORD }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
           registry: ${{ env.OPERATOR_IMAGE_REGISTRY }}
       
       - name: "Append to Image Manifest"
