@@ -315,7 +315,7 @@ jobs:
           for TAG in ${{ needs.setup.outputs.image_platform_tags }}; do \
               podman manifest add ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }} docker://${{ env.OPERATOR_IMAGE_REPOSITORY }}:$TAG-${{ env.OPERATOR_VERSION }}; \
           done
-          podman manifest push --all ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }}
+          podman manifest push ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }}
 
   build-bundle:
     runs-on: ubuntu-latest
