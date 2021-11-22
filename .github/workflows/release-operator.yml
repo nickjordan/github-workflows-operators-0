@@ -312,8 +312,8 @@ jobs:
         shell: bash
         run: |
           podman manifest create ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }}
-          for IMGTAG in  ${{ needs.setup.outputs.image_platform_tags }}; do \
-              podman manifest add ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }} docker://${{ env.OPERATOR_IMAGE_REPOSITORY }}:IMGTAG; \
+          for TAG in (${{ needs.setup.outputs.image_platform_tags }}); do \
+              podman manifest add ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }} docker://${{ env.OPERATOR_IMAGE_REPOSITORY }}:$TAG-${{ env.OPERATOR_VERSION }}; \
           done
           podman manifest push --all ${{ env.OPERATOR_IMAGE_REPOSITORY }}:${{ env.OPERATOR_VERSION }}
 
