@@ -406,7 +406,7 @@ jobs:
           file: ./bundle.Dockerfile
           platforms: ${{ matrix.platform }}
           push: true
-          tags: "${{ env.BUNDLE_IMAGE_REPOSITORY }}:${{ matrix.platform }}-${{ env.BUNDLE_VERSION }}"
+          tags: "${{ env.BUNDLE_IMAGE_REPOSITORY }}:latest,${{ env.BUNDLE_IMAGE_REPOSITORY }}:${{ env.BUNDLE_VERSION }}"
           
       - name: Prepare Distribution Artifacts
         shell: bash
