@@ -20,7 +20,7 @@ on:
       COMMUNITY_OPERATOR_PAT:
         description: 'Github PAT Token for Community Operator Fork Git Operations'
         required: true
-      GITHUB_TOKEN:
+      PAT_TOKEN:
         description: 'Github PAT Token for Github Release Operations'
         required: true      
       REGISTRY_USERNAME:
