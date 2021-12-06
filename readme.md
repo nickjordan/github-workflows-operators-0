@@ -11,7 +11,8 @@ This workflow allows a caller repositiory following a common structure to build 
 ##### Caller (Operator Repo) Configuration 
 * Operator Dockerfile located at ```./Dockerfile``` in root of Repository
 * Bundle Dockerfile located at ```./bundle.Dockerfile``` in root of Repository
-##### Caller (Operator Repo) Github Repository Secrets 
+##### Caller (Operator Repo) Github Repository Secrets
+* PAT_TOKEN - Github PAT Token for Github Release Operations
 * COMMUNITY_OPERATOR_PAT - (Required) 'Github PAT Token for Community Operator Fork Git Operations'
 * REGISTRY_USERNAME - (Required) Username for registry
 * REGISTRY_PASSWORD - (Required) Password for registry
@@ -30,6 +31,7 @@ jobs:
     name: release-operator
     uses: nickjordan/github-workflows-operators/.github/workflows/release-operator.yml@main
     secrets: 
+      PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       COMMUNITY_OPERATOR_PAT: ${{ secrets.COMMUNITY_OPERATOR_PAT }}
       BUNDLE_IMAGE_REPOSITORY: ${{ secrets.BUNDLE_IMAGE_REPOSITORY }}
       OPERATOR_IMAGE_REPOSITORY: ${{ secrets.OPERATOR_IMAGE_REPOSITORY }}
